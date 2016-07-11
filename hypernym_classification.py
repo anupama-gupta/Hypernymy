@@ -34,18 +34,22 @@ def extract_features ( train_words, class_name ) :
 	return features_list
 
 
-# Input : Two sets of dictionaries : 
-#1. pos_dicct : Key - Hypernym , Values - True hyponymns , eg: pos_dict['animal'] = ['cat', 'dog', 'goat']
-#2. neg_dict : Key - Hypernym , Values - False hyponyms, eg : neg_dict['animal'] = ['grass', 'prey', 'bone', 'ocean' ]
+''' Input :  
+1. pos_dict : Key - Hypernym , Values - True hyponymns, eg: pos_dict['animal'] = ['cat', 'dog', 'goat']
+2. neg_dict : Key - Hypernym , Values - False hyponyms, eg : neg_dict['animal'] = ['grass', 'prey', 'bone', 'ocean' ]
 
-#Output : 2 sets of dictionaries :
-# train set = First 75% ( by default ) of positive instances + First 75% of negative instances 
-# test set = First 25% ( by default ) of positive instances + First 25% of negative instances
+ The following method extracts :
+ train_set => 75% of positive instances + 75% of negative instances 
+ test_set =>  25% of positive instances + 25% of negative instances
+ 
+ Output : 
+ train_dataset : key - hypernym , value (list of lists) - [ train_set_vectors, train_set_labels, train_set_names ]
+ test_dataset  : key - hypernym , value (list of lists) - [ test_set_vectors, test_set_labels, test_set_names ]
+ Eg : train_dataset['animal'] = [ [ [0.04,..], [0.03,...], .. ] , [1,1,1..,0,0], ['cat', 'dog',...] ] '''
 
-def split_train_val_test ( train=0.75 ) : 
+def split_train_test ( train=0.75 ) : 
 
 	train_dataset = collections.defaultdict(list)
-	val_dataset = collections.defaultdict(list)
 	test_dataset = collections.defaultdict(list)
 	
 	for class_name, hypo_list in pos_dict.items() :
@@ -68,9 +72,9 @@ def split_train_val_test ( train=0.75 ) :
 
 
 	return train_dataset, test_dataset
-
 		
-
+#Return the list of word vectors(as numpy arrays) of positive instances in the train_dataset
+#This list will be used to train the regression model in 'lex_function_learning'
 def extract_postive_data ( dataset, labels ) :
 	
 	pos_dataset = []
@@ -79,7 +83,7 @@ def extract_postive_data ( dataset, labels ) :
 			pos_dataset.append(numpy.asarray(x))
 	return pos_dataset
 
-
+#Return the list of word vectors(as numpy arrays) 
 def extract_numpy_features ( dataset ) :
 	
 	numpy_dataset = []
@@ -282,7 +286,7 @@ if __name__ == "__main__":
 	neg_dict = pickle.load( open(args.neg_dict, 'rb') )
 	model = gensim.models.Word2Vec.load(args.model)
 	
-	train_dataset, test_dataset = split_train_val_test (  )
+	train_dataset, test_dataset = split_train_test (  )
 
 	if( args.function == "naive_svm" ) :
 		SVM_classfier_classwise ( )
