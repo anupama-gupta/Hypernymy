@@ -1,6 +1,6 @@
-''' Implement Hypernym Relation Detection (binary classification using Linear SVM ) using the following feature vectors :
- 1. Existing method - Features  : Normalized Word2Vec hypnonym vectors 
- 2. Our method - Features : Modified hypnonym vectors (modifying function is learnt using regression) '''
+# Implement Hypernym Relation Detection (binary classification using Linear SVM ) using the following feature vectors :
+# 1. Existing method - Features  : Normalized Word2Vec hypnonym vectors 
+# 2. Our method - Features : Modified hypnonym vectors (modifying function is learnt using regression)
 
 import pickle
 import collections
@@ -28,8 +28,8 @@ def extract_features ( train_words, class_name ) :
 		a = numpy.asarray(model[t])
 		# Normalize the vector
 		a = a / numpy.linalg.norm(a)		
- 		features_list.append(a.tolist())
-		#features_list.append((b-a).tolist())
+ 		features_list.append(a)
+		#features_list.append((b-a))
 
 	return features_list
 
@@ -93,11 +93,9 @@ def lex_function_classifier_training( class_name, reg_model, hyper_vec) :
 		
 	for i, vec in enumerate(train_dataset[class_name][0]) :
 
-		vec = numpy.asarray(vec)
-		sub = numpy.asarray(hyper_vec) - vec
-				
+		sub = hyper_vec - vec				
 		Y_pred = reg_model.predict(vec.reshape(1, -1))
-		mapped_features.append(Y_pred[0].tolist())	
+		mapped_features.append(Y_pred[0])	
 				
 
 	clf = sklearn.svm.SVC(kernel="linear", probability=True)
@@ -123,7 +121,6 @@ def lex_function_learning( class_name,  hyper_vec ) :
 
 		for hypo_vec in X :
 
-			hypo_vec = numpy.asarray(hypo_vec)
 			sub = hyper_vec-hypo_vec
 			Y.append(sub) # Target = difference vector ( Hypernym_vector - Hyponym_vector )
 			#Y.append(hyper_vec) # Target = Hypernym vector 
@@ -147,11 +144,11 @@ def lex_function_test( class_name, reg_model, hyper_vec, clf) :
 			vec = numpy.asarray(vec)
 			sub = numpy.asarray(hyper_vec) - vec
 			Y_pred = reg_model.predict(vec.reshape(1, -1))
-			mapped_features.append(Y_pred[0].tolist())					
+			mapped_features.append(Y_pred[0])					
 		
 
 		y_pred = clf.predict(mapped_features)
-		#y_pred_proba = clf.predict_proba(mapped_features).tolist()
+		#y_pred_proba = clf.predict_proba(mapped_features)
 
 		test_acc = sklearn.metrics.accuracy_score( test_dataset[class_name][1], y_pred)
 		precision = sklearn.metrics.precision_score( test_dataset[class_name][1], y_pred)
@@ -287,3 +284,6 @@ if __name__ == "__main__":
 
 	elif( args.function == "lex_function" ) :
 		lex_function_classwise ( )
+	
+
+	
