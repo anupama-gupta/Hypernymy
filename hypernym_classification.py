@@ -1,6 +1,6 @@
-# Code to perform binary classification (Linear SVM) of hyponym features classwise (40 classes) using two methods :
-# 1. State-of-the-art -> Using Normalized Word2Vec hypnonym vectors as Features
-# 2. Our method -> Using mapped hypnonym vectors as Features ( by learning a lexical function using positive hypnonym instances )
+# Implement Hypernym Relation Detection (binary classification using Linear SVM ) using the following feature vectors :
+# 1. Existing method - Features  : Normalized Word2Vec hypnonym vectors 
+# 2. Our method - Features : Modified hypnonym vectors (modifying function is learnt using regression)
 
 import pickle
 import collections
@@ -17,30 +17,29 @@ from sklearn.kernel_ridge import KernelRidge
 from sklearn.metrics.pairwise import euclidean_distances
 from sklearn.metrics import r2_score
 
-# Return the list of features corresponding to the list of hypnonym names
+# Return the list of vectors corresponding to the list of hypnonym names
+# eg, train_words = ["cat", "dog", "goat"], class_name = "animal", features_list = [ [0.04,0.07...], [0.05,..], [0.04,...] ]
 def extract_features ( train_words, class_name ) :
 
+	#b = numpy.asarray(model[class_name])
+	#b = b / numpy.linalg.norm(b)
 	features_list = []
 	for t in train_words  :
-		a = numpy.asarray(model[t])	
-
+		a = numpy.asarray(model[t])
 		# Normalize the vector
 		a = a / numpy.linalg.norm(a)		
  		features_list.append(a.tolist())
-
-		#b = numpy.asarray(model[class_name])
-		#b = b / numpy.linalg.norm(b)
 		#features_list.append((b-a).tolist())
 
 	return features_list
 
 
 # Input : Two sets of dictionaries : 
-#1. Key - Hypernym , Values - True hyponymns
-#2. Key - Hypernym , Values - False hyponyms
+#1. pos_dicct : Key - Hypernym , Values - True hyponymns , eg: pos_dict['animal'] = ['cat', 'dog', 'goat']
+#2. neg_dict : Key - Hypernym , Values - False hyponyms, eg : neg_dict['animal'] = ['grass', 'prey', 'bone', 'ocean' ]
 
-#Output : 3 sets dictionaries :
-# train set = First 70% ( by default ) of positive instances + First 70% of negative instances 
+#Output : 2 sets of dictionaries :
+# train set = First 75% ( by default ) of positive instances + First 75% of negative instances 
 # test set = First 25% ( by default ) of positive instances + First 25% of negative instances
 
 def split_train_val_test ( train=0.75 ) : 
