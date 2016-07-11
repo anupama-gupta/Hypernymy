@@ -1,6 +1,12 @@
-# Implement Hypernym Relation Detection (binary classification using Linear SVM ) using the following feature vectors :
-# 1. Existing method - Features  : Normalized Word2Vec hypnonym vectors 
-# 2. Our method - Features : Modified hypnonym vectors (modifying function is learnt using regression)
+''' Implement Hypernym Relation Detection (binary classification using Linear SVM ) using the following feature vectors :
+1. Existing method - Features  : Normalized Word2Vec hypnonym vectors 
+2. Our method - Features : Modified hypnonym vectors (modifying function is learnt using regression)
+Command line eg: python hypernym_classification.py lex_function /path/pos_train_40_classes_7531_pairs_allsenses.p /path/neg_train_40_classes_22593_pairs_allsenses.p /path/word2vec_ukwac_unigrams20_size300.pkl
+Where :
+    /path/chunks - Corpus file(s) locationthre
+    --unigrams 60000 - top n(60000) most frequent unigrams ( nouns and adjectives )
+    --bigrams 100000 - top n(100000) most frequent bigrams ( adjective noun compounds )
+    --contexts 10000 - top n(10000) most frequent context words '''
 
 import pickle
 import collections
@@ -149,14 +155,12 @@ def lex_function_test( class_name, reg_model, hyper_vec, clf) :
 		y_pred = clf.predict(mapped_features)
 		#y_pred_proba = clf.predict_proba(mapped_features)
 
-		test_acc = sklearn.metrics.accuracy_score( test_dataset[class_name][1], y_pred)
+		test_acc = sklearn.metrics.accuracy_score(test_dataset[class_name][1], y_pred)
 		precision = sklearn.metrics.precision_score( test_dataset[class_name][1], y_pred)
 		recall = sklearn.metrics.recall_score(test_dataset[class_name][1], y_pred)
 		auc = sklearn.metrics.roc_auc_score( test_dataset[class_name][1], y_pred)
 
 		return test_acc, len(test_dataset[class_name][0]), precision, recall, auc
-
-#usage : python hypernym_classification_2.py lex_function  /home/anupama/tensor/data/mydata/pos_train_40_classes_7531_pairs_allsenses.p #/home/anupama/tensor/data/mydata/neg_train_40_classes_22593_pairs_allsenses.p /home/anupama/tensor/models/word2vec/word2vec_ukwac_unigrams20_size300.pkl
 
 def print_results( test_acc, train_acc, test_len , test_p, test_r, test_f, test_auc ):
 
