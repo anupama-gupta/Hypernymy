@@ -1,2 +1,8 @@
-#Model link on the server
+#Word2vec Model 
 /home/anupama/tensor/models/word2vec/word2vec_ukwac_unigrams20_size300.pkl
+
+#Pos_dict
+/home/anupama/tensor/data/mydata/pos_train_40_classes_7531_pairs_allsenses.p
+
+#Neg_dict
+/home/anupama/tensor/data/mydata/neg_train_40_classes_22593_pairs_allsenses.p
