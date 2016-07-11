@@ -141,8 +141,7 @@ def lex_function_test( class_name, reg_model, hyper_vec, clf) :
 
 		for vec in test_dataset[class_name][0] :
 
-			vec = numpy.asarray(vec)
-			sub = numpy.asarray(hyper_vec) - vec
+			sub = hyper_vec - vec
 			Y_pred = reg_model.predict(vec.reshape(1, -1))
 			mapped_features.append(Y_pred[0])					
 		
@@ -280,10 +279,7 @@ if __name__ == "__main__":
 	train_dataset, test_dataset = split_train_test (  )
 
 	if( args.function == "naive_svm" ) :
-		SVM_classfier_classwise ( )
+		SVM_classfier_classwise( )
 
 	elif( args.function == "lex_function" ) :
-		lex_function_classwise ( )
-	
-
-	
+		lex_function_classwise( )
