@@ -6,3 +6,8 @@
 
 #Neg_dict
 /home/anupama/tensor/data/mydata/neg_train_40_classes_22593_pairs_allsenses.p
+
+#Ukwac corpus location 
+/home/anupama/tensor/corpus/ukwac/tagged/
+
+
