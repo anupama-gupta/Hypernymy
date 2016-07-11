@@ -1,7 +1,7 @@
 ''' 
 Implement Hypernym Relation Detection (binary classification using Linear SVM ) using the following feature vectors :
-1. Existing method - Features  : Normalized Word2Vec hypnonym vectors 
-2. Our method - Features : Modified hypnonym vectors (modifying function is learnt using regression)
+1. Existing method - Features  : Word2Vec hypnonym vectors 
+2. Our method - Features : Modified hypnonym vectors (modifying lexical function function is learnt using regression)
 Command line eg: 
 python hypernym_classification.py naive_svm /path/pos_dict.p /path/neg_dict.p /path/word2vec_model.pkl
 OR
