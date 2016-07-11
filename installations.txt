@@ -1,0 +1,8 @@
+#Gensim package
+https://radimrehurek.com/gensim/install.html
+
+#Scikit-learn
+http://scikit-learn.org/stable/install.html
+
+#nltk english tokenizer (punkt)
+Use nltk.download()
