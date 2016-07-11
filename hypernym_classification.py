@@ -1,12 +1,17 @@
-''' Implement Hypernym Relation Detection (binary classification using Linear SVM ) using the following feature vectors :
+''' 
+Implement Hypernym Relation Detection (binary classification using Linear SVM ) using the following feature vectors :
 1. Existing method - Features  : Normalized Word2Vec hypnonym vectors 
 2. Our method - Features : Modified hypnonym vectors (modifying function is learnt using regression)
-Command line eg: python hypernym_classification.py lex_function /path/pos_train_40_classes_7531_pairs_allsenses.p /path/neg_train_40_classes_22593_pairs_allsenses.p /path/word2vec_ukwac_unigrams20_size300.pkl
+Command line eg: 
+python hypernym_classification.py naive_svm /path/pos_dict.p /path/neg_dict.p /path/word2vec_model.pkl
+OR
+python hypernym_classification.py lex_function /path/pos_dict.p /path/neg_dict.p /path/word2vec_model.pkl
+
 Where :
-    /path/chunks - Corpus file(s) locationthre
-    --unigrams 60000 - top n(60000) most frequent unigrams ( nouns and adjectives )
-    --bigrams 100000 - top n(100000) most frequent bigrams ( adjective noun compounds )
-    --contexts 10000 - top n(10000) most frequent context words '''
+    /path/pos_dict.p - dictionary storing true hypnonyms,  eg: pos_dict['animal'] = ['cat', 'dog', 'goat']
+    /path/neg_dict.p - dictionary storing false hypnonyms, neg_dict['animal'] = ['grass', 'prey', 'bone', 'ocean' ]
+    /path/word2vec_model.pkl - word2vec model (storing the word vectors)
+ '''
 
 import pickle
 import collections
@@ -89,7 +94,7 @@ def extract_postive_features ( dataset, labels ) :
 			pos_dataset.append(x)
 	return pos_dataset
 	
-
+#Learns a classifier using the features obtained by applying the function mapping 
 def lex_function_classifier_training( class_name, reg_model, hyper_vec) :
 	
 	#labels = train_dataset[class_name][1]
@@ -137,7 +142,7 @@ def lex_function_learning( class_name,  hyper_vec ) :
 		
 		return pls2, train_acc, len(X)
 
-
+#Evaluates the classifier model on the test_dataset using the lexically mapped features as input
 def lex_function_test( class_name, reg_model, hyper_vec, clf) :
 	      
 		#labels = test_dataset[class_name][1]		
@@ -161,7 +166,8 @@ def lex_function_test( class_name, reg_model, hyper_vec, clf) :
 		auc = sklearn.metrics.roc_auc_score( test_dataset[class_name][1], y_pred)
 
 		return test_acc, len(test_dataset[class_name][0]), precision, recall, auc
-
+		
+#Displays the individual and average evalaution scores for all the classes/hypernyms
 def print_results( test_acc, train_acc, test_len , test_p, test_r, test_f, test_auc ):
 
 	avg_test_p = 0
@@ -185,7 +191,10 @@ def print_results( test_acc, train_acc, test_len , test_p, test_r, test_f, test_
 	print "avg fscore = ", avg_test_f/len(test_acc)
 	print "avg auc = ", avg_test_auc/len(test_acc)
 	
-
+''' Following tasks executed :
+1. lexical function (LF) learning using positive hyponym instances in the train_dataset
+2. classification model evaluation using the features obtained by using the LF
+''' 
 def lex_function_classwise ( ) :
 
 	train_acc = {}
@@ -230,6 +239,7 @@ def cosine_similarity(a, b) :
 	c = dot(a,b.T)/linalg.norm(a)/linalg.norm(b)
 	return c
 
+#Perform classification of hypernym relation using the word2vec hyponym vectors as features
 def SVM_classfier_classwise (  ) :
     	
 	test_p = {}
