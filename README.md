@@ -8,5 +8,5 @@ Implements binary classification ( hypernym relation or not ) using two methods 
 1. word2vec hyponym vectors
 2. hyponym vectors obtained by applying a lexical function F , learnt using partial least Squares (PLS) regression
 
-###### * refer to /datasets/links.txt for the link to the trained word2vec model
+###### * Links to datasets ( /datasets/links.txt )
 
