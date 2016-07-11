@@ -239,7 +239,7 @@ def cosine_similarity(a, b) :
 	c = dot(a,b.T)/linalg.norm(a)/linalg.norm(b)
 	return c
 
-#Perform classification of hypernym relation using the word2vec hyponym vectors as features
+#Perform hypernym relation classification using word2vec hyponym vectors as features
 def SVM_classfier_classwise (  ) :
     	
 	test_p = {}
