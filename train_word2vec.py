@@ -1,3 +1,10 @@
+''''
+Learn word2vec embeddings from the ukwac corpus - /home/anupama/tensor/corpus/ukwac/tagged/
+Command line eg :
+python train_unigrams.py  /home/anupama/tensor/corpus/ukwac/tagged/
+'''
+
+
 import gensim
 import logging
 import os
@@ -40,19 +47,14 @@ class MySentences(object):
 				continue
 			sent += (wordlist[2] + " ")   
 
-#python train_unigrams.py  /home/anupama/tensor/corpus/ukwac/tagged/          
+          
 
 if __name__ == "__main__":
 	
-	parser = argparse.ArgumentParser()	
-	
+	parser = argparse.ArgumentParser()
 	parser.add_argument("corpus", help="Corpus filepath" )
-
 	args = parser.parse_args()	
-                 
-	#sentences = MySentences('/home/anupama/tensor/corpus/ukwac/tagged/')
-	#model.save('/home/anupama/tensor/models/word2vec/word2vec_ukwac_unigrams20_size300.pkl')
-
+ 
 	sentences = MySentences(args.corpus) 
 	model = gensim.models.Word2Vec(sentences, min_count = 20, workers = 8, size=300)	
 	model.save(os.getcwd()+'/word2vec_ukwac_unigrams20_size300.pkl')
