@@ -75,33 +75,25 @@ def split_train_test ( train=0.75 ) :
 		
 #Return the list of word vectors(as numpy arrays) of positive instances in the train_dataset
 #This list will be used to train the regression model in 'lex_function_learning'
-def extract_postive_data ( dataset, labels ) :
+def extract_postive_features ( dataset, labels ) :
 	
 	pos_dataset = []
 	for i , x in enumerate ( dataset ) :
 		if( labels[i] == 1 ) :
-			pos_dataset.append(numpy.asarray(x))
+			pos_dataset.append(x)
 	return pos_dataset
-
-#Return the list of word vectors(as numpy arrays) 
-def extract_numpy_features ( dataset ) :
-	
-	numpy_dataset = []
-	for i , x in enumerate ( dataset ) :
-		numpy_dataset.append(numpy.asarray(x))
-	return numpy_dataset
 	
 
 def lex_function_classifier_training( class_name, reg_model, hyper_vec) :
 	
-	hypo_vectors = extract_numpy_features (train_dataset[class_name][0])
-	labels = train_dataset[class_name][1]
-	hypo_name = train_dataset[class_name][2]
+	#labels = train_dataset[class_name][1]
+	#hypo_name = train_dataset[class_name][2]
 
 	mapped_features = []
 		
-	for i, vec in enumerate(hypo_vectors) :
+	for i, vec in enumerate(train_dataset[class_name][0]) :
 
+		vec = numpy.asarray(vec)
 		sub = numpy.asarray(hyper_vec) - vec
 				
 		Y_pred = reg_model.predict(vec.reshape(1, -1))
@@ -125,11 +117,13 @@ def lex_function_learning( class_name,  hyper_vec ) :
 		#pls2 = KernelRidge( )
 		pls2 = PLSRegression(n_components=50, max_iter=10000)
 
-		X = extract_postive_data ( train_dataset[class_name][0], train_dataset[class_name][1] )			
+		X = extract_postive_features ( train_dataset[class_name][0], train_dataset[class_name][1] )			
 
 		Y = []
 
 		for hypo_vec in X :
+
+			hypo_vec = numpy.asarray(hypo_vec)
 			sub = hyper_vec-hypo_vec
 			Y.append(sub) # Target = difference vector ( Hypernym_vector - Hyponym_vector )
 			#Y.append(hyper_vec) # Target = Hypernym vector 
@@ -143,14 +137,14 @@ def lex_function_learning( class_name,  hyper_vec ) :
 
 def lex_function_test( class_name, reg_model, hyper_vec, clf) :
 	      
-		hypo_vectors = extract_numpy_features ( test_dataset[class_name][0] )
-		labels = test_dataset[class_name][1]		
-		hypo_name = test_dataset[class_name][2]
+		#labels = test_dataset[class_name][1]		
+		#hypo_name = test_dataset[class_name][2]
 				
 		mapped_features = []
 
-		for vec in hypo_vectors :
+		for vec in test_dataset[class_name][0] :
 
+			vec = numpy.asarray(vec)
 			sub = numpy.asarray(hyper_vec) - vec
 			Y_pred = reg_model.predict(vec.reshape(1, -1))
 			mapped_features.append(Y_pred[0].tolist())					
@@ -164,7 +158,7 @@ def lex_function_test( class_name, reg_model, hyper_vec, clf) :
 		recall = sklearn.metrics.recall_score(test_dataset[class_name][1], y_pred)
 		auc = sklearn.metrics.roc_auc_score( test_dataset[class_name][1], y_pred)
 
-		return test_acc, len(hypo_vectors), precision, recall, auc
+		return test_acc, len(test_dataset[class_name][0]), precision, recall, auc
 
 #usage : python hypernym_classification_2.py lex_function  /home/anupama/tensor/data/mydata/pos_train_40_classes_7531_pairs_allsenses.p #/home/anupama/tensor/data/mydata/neg_train_40_classes_22593_pairs_allsenses.p /home/anupama/tensor/models/word2vec/word2vec_ukwac_unigrams20_size300.pkl
 
@@ -293,6 +287,3 @@ if __name__ == "__main__":
 
 	elif( args.function == "lex_function" ) :
 		lex_function_classwise ( )
-	
-
-	
