@@ -1,6 +1,6 @@
-# Implement Hypernym Relation Detection (binary classification using Linear SVM ) using the following feature vectors :
-# 1. Existing method - Features  : Normalized Word2Vec hypnonym vectors 
-# 2. Our method - Features : Modified hypnonym vectors (modifying function is learnt using regression)
+''' Implement Hypernym Relation Detection (binary classification using Linear SVM ) using the following feature vectors :
+ 1. Existing method - Features  : Normalized Word2Vec hypnonym vectors 
+ 2. Our method - Features : Modified hypnonym vectors (modifying function is learnt using regression) '''
 
 import pickle
 import collections
