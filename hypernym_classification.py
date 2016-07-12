@@ -1,16 +1,33 @@
 ''' 
-Implement Hypernym Relation Detection (binary classification using Linear SVM ) using the following feature vectors :
-1. Existing method - Features  : Word2Vec hypnonym vectors 
-2. Our method - Features : Modified hypnonym vectors (modifying lexical function function is learnt using regression)
-Command line eg: 
-python hypernym_classification.py naive_svm /path/pos_dict.p /path/neg_dict.p /path/word2vec_model.pkl
-OR
-python hypernym_classification.py lex_function /path/pos_dict.p /path/neg_dict.p /path/word2vec_model.pkl
+Implement Hypernym Relation Detection (binary classification using Linear SVM ) using the following feature vector representations :
+
+1)  Word2Vec hypnonym vectors 
+2)  Modified hypnonym vectors (modifying lexical function function is learnt using regression)
+
+Command line usage: 
+
+1. method 1)
+python hypernym_classification.py naive_svm /path/pos_dict /path/neg_dict /path/word2vec_model
+
+2. method 2)
+python hypernym_classification.py lex_function /path/pos_dict /path/neg_dict /path/word2vec_model
 
 Where :
-    /path/pos_dict.p - dictionary storing true hypnonyms,  eg: pos_dict['animal'] = ['cat', 'dog', 'goat']
-    /path/neg_dict.p - dictionary storing false hypnonyms, neg_dict['animal'] = ['grass', 'prey', 'bone', 'ocean' ]
-    /path/word2vec_model.pkl - word2vec model (storing the word vectors)
+/path/pos_dict - dictionary storing true hypnonyms,  eg: pos_dict['animal'] = ['cat', 'dog', 'goat']
+/path/neg_dict - dictionary storing false hypnonyms, neg_dict['animal'] = ['grass', 'prey', 'bone', 'ocean' ]
+/path/word2vec_model - word2vec model (storing the word vectors)
+
+File Download links :
+
+word2vec model 
+/home/anupama/tensor/models/word2vec/word2vec_ukwac_unigrams20_size300.pkl
+
+pos_dict
+/home/anupama/tensor/data/mydata/pos_train_40_classes_7531_pairs_allsenses.p
+
+neg_dict
+/home/anupama/tensor/data/mydata/neg_train_40_classes_22593_pairs_allsenses.p
+
  '''
 
 import pickle
