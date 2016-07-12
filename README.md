@@ -9,6 +9,6 @@ Learns word embeddings from the ukwac corpus using word2vec toolkit (https://rad
 Implements binary classification ( hypernym relation or not ) using two methods of feature representation :
 
 1. word2vec hyponym vectors
-2. modified hyponym vectors (obtained by applying lexical function F on the word2vec vectors), learnt using partial least Squares (PLS) regression
+2. modified hyponym vectors (obtained by applying lexical function on the word2vec vectors)
 
 
