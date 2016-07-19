@@ -1,3 +1,11 @@
+#Word2vec Model ( topn=20, vector size = 300 )
+/home/anupama/tensor/models/word2vec/word2vec_ukwac_unigrams20_size300.pkl
 
-#corpus_folder
+#Pos_dict
+/home/anupama/tensor/data/mydata/pos_train_40_classes_7531_pairs_allsenses.p
+
+#Neg_dict
+/home/anupama/tensor/data/mydata/neg_train_40_classes_22593_pairs_allsenses.p
+
+#Ukwac corpus location 
 /home/anupama/tensor/corpus/ukwac/tagged/
