@@ -1,0 +1,3 @@
+
+#corpus_folder
+/home/anupama/tensor/corpus/ukwac/tagged/
