@@ -17,17 +17,6 @@ Where :
 /path/neg_dict - dictionary storing false hypnonyms, neg_dict['animal'] = ['grass', 'prey', 'bone', 'ocean' ]
 /path/word2vec_model - word2vec model (storing the word vectors)
 
-File Download links :
-
-word2vec model 
-/home/anupama/tensor/models/word2vec/word2vec_ukwac_unigrams20_size300.pkl
-
-pos_dict
-/home/anupama/tensor/data/mydata/pos_train_40_classes_7531_pairs_allsenses.p
-
-neg_dict
-/home/anupama/tensor/data/mydata/neg_train_40_classes_22593_pairs_allsenses.p
-
  '''
 
 import pickle
@@ -62,7 +51,8 @@ def extract_features ( train_words, class_name ) :
 	return features_list
 
 
-''' Input :  
+'''
+Input :  
 1. pos_dict : Key - Hypernym , Values - True hyponymns, eg: pos_dict['animal'] = ['cat', 'dog', 'goat']
 2. neg_dict : Key - Hypernym , Values - False hyponyms, eg : neg_dict['animal'] = ['grass', 'prey', 'bone', 'ocean' ]
 
@@ -71,9 +61,12 @@ def extract_features ( train_words, class_name ) :
  test_set =>  25% of positive instances + 25% of negative instances
  
  Output : 
- train_dataset : key - hypernym , value (list of lists) - [ train_set_vectors, train_set_labels, train_set_names ]
- test_dataset  : key - hypernym , value (list of lists) - [ test_set_vectors, test_set_labels, test_set_names ]
- Eg : train_dataset['animal'] = [ [ [0.04,..], [0.03,...], .. ] , [1,1,1..,0,0], ['cat', 'dog',...] ] '''
+ 1. train_dataset ( dictionary where :  key - hypernym , value -  [ [train_set_vectors], [train_set_labels], [train_set_names] ] ) 
+ 2. test_dataset  ( dictionary where :  key - hypernym , value  - [ [test_set_vectors],  [test_set_labels] , [test_set_names] ] )
+ 
+ Eg : train_dataset['animal'] = [ [ [0.04,..], [0.03,...], .. ] , [1,1,1,.,0,0], ['cat', 'dog',...] ] 
+ 
+ '''
 
 def split_train_test ( train=0.75 ) : 
 
