@@ -153,12 +153,12 @@ def lex_function_test( class_name, reg_model, hyper_vec, clf) :
 		test_acc = sklearn.metrics.accuracy_score(test_dataset[class_name][1], y_pred)
 		precision = sklearn.metrics.precision_score( test_dataset[class_name][1], y_pred)
 		recall = sklearn.metrics.recall_score(test_dataset[class_name][1], y_pred)
-		auc = sklearn.metrics.roc_auc_score( test_dataset[class_name][1], y_pred)
+		
 
-		return test_acc, len(test_dataset[class_name][0]), precision, recall, auc
+		return test_acc, len(test_dataset[class_name][0]), precision, recall
 		
 #Displays the individual and average evalaution scores for all the classes/hypernyms
-def print_results( test_acc, train_acc, test_len , test_p, test_r, test_f, test_auc ):
+def print_results( test_acc, train_acc, test_len , test_p, test_r, test_f):
 
 	avg_test_p = 0
 	avg_test_r = 0
@@ -167,7 +167,7 @@ def print_results( test_acc, train_acc, test_len , test_p, test_r, test_f, test_
 	avg_test_acc = 0
 
 	for key, value in sorted(test_acc.items(), key=operator.itemgetter(1), reverse=True )  :
-		print key , " --> ", value, "(", test_len[key], ")", "train acc = ", train_acc[key], " p ", test_p[key], "r = ", test_r[key], "f = ", test_f[key]," auc = ", test_auc[key]
+		print key , " --> ", value, "(", test_len[key], ")", "train acc = ", train_acc[key], " p ", test_p[key], "r = ", test_r[key], "f = ", test_f[key]
 
 		avg_test_p += test_p[key]
 		avg_test_r += test_r[key]
@@ -175,7 +175,7 @@ def print_results( test_acc, train_acc, test_len , test_p, test_r, test_f, test_
 		avg_test_auc += test_auc[key]
 		avg_test_acc += value
 
-	print "avg acc = ", ((float)(avg_test_acc))/len(test_acc)
+	print "avg accuracy = ", ((float)(avg_test_acc))/len(test_acc)
 	print "avg precision = ", avg_test_p/len(test_acc)
 	print "avg recall = ", avg_test_r/len(test_acc)
 	print "avg fscore = ", avg_test_f/len(test_acc)
@@ -194,7 +194,6 @@ def lex_function_classwise ( ) :
 	test_precision = {}
 	test_recall = {}
 	test_fscore = {}
-	test_auc = {}	
 
 	for class_name in train_dataset.keys():
 		
@@ -209,7 +208,7 @@ def lex_function_classwise ( ) :
 		clf, acc =  lex_function_classifier_training( class_name, reg_model, hyper_vec )
 
 		# Testing 
-		testacc, tlen, precision, recall, auc = lex_function_test( class_name, reg_model, hyper_vec, clf) 
+		testacc, tlen, precision, recall = lex_function_test( class_name, reg_model, hyper_vec, clf) 
 		
 		train_acc[class_name] = acc
 		test_acc[class_name] = testacc
@@ -217,11 +216,10 @@ def lex_function_classwise ( ) :
 		test_len[class_name] = tlen
 		test_precision[class_name] = precision
 		test_recall[class_name] = recall
-		test_auc[class_name] = auc		
 		test_fscore[class_name] = ( 2 * precision * recall ) / ( precision + recall )
 
 	
-	print_results( test_acc, train_acc, test_len , test_precision, test_recall, test_fscore, test_auc )	
+	print_results( test_acc, train_acc, test_len , test_precision, test_recall, test_fscore )	
 
 
 def cosine_similarity(a, b) :
@@ -235,7 +233,6 @@ def SVM_classfier_classwise (  ) :
 	test_p = {}
 	test_r = {}
 	test_f = {}
-	test_auc = {}
 	test_acc = {}
 	test_len = {}
 	train_acc = {}	
@@ -255,13 +252,12 @@ def SVM_classfier_classwise (  ) :
 		acc = sklearn.metrics.accuracy_score(test_dataset[k][1], y_pred)
 		test_p[k] = sklearn.metrics.precision_score(test_dataset[k][1], y_pred)
 		test_r[k] = sklearn.metrics.recall_score(test_dataset[k][1], y_pred)
-		test_auc[k] = sklearn.metrics.roc_auc_score( test_dataset[k][1], y_pred)
 		test_f[k] = sklearn.metrics.f1_score( test_dataset[k][1], y_pred)
 		test_len[k] = len(test_dataset[k][1])
 		train_acc[k] = trainacc
 		test_acc[k] = acc
 
-	print_results( test_acc, train_acc, test_len , test_p, test_r, test_f, test_auc )
+	print_results( test_acc, train_acc, test_len , test_p, test_r, test_f )
 		
 
 
