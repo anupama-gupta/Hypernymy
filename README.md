@@ -1,12 +1,12 @@
 ## About
 
-Implements a Binary CLassification Task (hypernym relation or not) using linear SVM. 
+Implements a Binary Classification Task (hypernym relation or not) using linear SVM. 
 
 The following feature vector representation methods are used:
 
-1)  Word2Vec hypnonym vectors 
+1)  Word2Vec hyponym vectors 
 
-2)  Modified hypnonym vectors (modifying lexical function function is learnt using regression)
+2)  Modified hyponym vectors (modifying lexical function  is learnt using regression)
 
 ## Usage: 
 
