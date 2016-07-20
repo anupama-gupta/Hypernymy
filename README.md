@@ -1,6 +1,6 @@
 ## About
 
-Implements a Binary Classification Task (hypernym relation or not) using linear SVM. 
+Implements a Binary Classification task (hypernym relation or not) using linear SVM. 
 
 The following feature vector representation methods are used:
 
