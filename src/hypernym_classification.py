@@ -163,7 +163,6 @@ def print_results( test_acc, train_acc, test_len , test_p, test_r, test_f):
 	avg_test_p = 0
 	avg_test_r = 0
  	avg_test_f = 0
-	avg_test_auc = 0
 	avg_test_acc = 0
 
 	for key, value in sorted(test_acc.items(), key=operator.itemgetter(1), reverse=True )  :
@@ -172,14 +171,13 @@ def print_results( test_acc, train_acc, test_len , test_p, test_r, test_f):
 		avg_test_p += test_p[key]
 		avg_test_r += test_r[key]
  		avg_test_f += test_f[key]
-		avg_test_auc += test_auc[key]
 		avg_test_acc += value
 
 	print "avg accuracy = ", ((float)(avg_test_acc))/len(test_acc)
 	print "avg precision = ", avg_test_p/len(test_acc)
 	print "avg recall = ", avg_test_r/len(test_acc)
 	print "avg fscore = ", avg_test_f/len(test_acc)
-	print "avg auc = ", avg_test_auc/len(test_acc)
+
 	
 ''' Following tasks executed :
 1. lexical function (LF) learning using positive hyponym instances in the train_dataset
