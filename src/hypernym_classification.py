@@ -114,7 +114,7 @@ def lex_function_learning( class_name,  hyper_vec ) :
 
 		#pls2 = KernelRidge( kernel = "rbf", gamma= 100)
 		#pls2 = KernelRidge( )
-		pls2 = PLSRegression(n_components=50, max_iter=10000)
+		pls2 = PLSRegression(n_components=50, max_iter=5000)
 
 		X = extract_postive_features ( train_dataset[class_name][0], train_dataset[class_name][1] )			
 
