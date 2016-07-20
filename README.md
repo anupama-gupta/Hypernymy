@@ -5,6 +5,7 @@ Implements a Binary CLassification Task (hypernym relation or not) using linear 
 The following feature vector representations are tested:
 
 1)  Word2Vec hypnonym vectors 
+
 2)  Modified hypnonym vectors (modifying lexical function function is learnt using regression)
 
 ## Usage: 
