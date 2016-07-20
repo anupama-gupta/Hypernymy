@@ -15,14 +15,16 @@ The following feature vector representations are tested:
 where :
 
 file1 - dictionary storing true hypnonyms,  eg: pos_dict['animal'] = ['cat', 'dog', 'goat']
+
 file2 - dictionary storing false hypnonyms, eg: neg_dict['animal'] = ['grass', 'prey', 'bone', 'ocean' ]
+
 file3 - word2vec model 
 
 ## Tools
 
 ### 1) train_word2vec
 
-Learns word2vec embeddings from the ukwac corpus using gensim [word2vec] toolkit (https://radimrehurek.com/gensim/install.html)
+Learns word2vec embeddings from the ukwac corpus using gensim [word2vec] (https://radimrehurek.com/gensim/install.html) toolkit.
 
 #### Usage :
 
