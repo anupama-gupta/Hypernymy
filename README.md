@@ -2,7 +2,7 @@
 
 Implements a Binary CLassification Task (hypernym relation or not) using linear SVM. 
 
-The following feature vector representations are tested:
+The following feature vector representation methods are used:
 
 1)  Word2Vec hypnonym vectors 
 
