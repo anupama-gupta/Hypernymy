@@ -20,11 +20,11 @@ Method 2)
 
 where :
 
-file1 - dictionary storing true hypnonyms,  eg: pos_dict['animal'] = ['cat', 'dog', 'goat']
+[file1] (https://github.com/anupama-gupta/Hypernymy/tree/master/dataset) - dictionary storing true hypnonyms,  eg: pos_dict['animal'] = ['cat', 'dog', 'goat']
 
-file2 - dictionary storing false hypnonyms, eg: neg_dict['animal'] = ['grass', 'prey', 'bone', 'ocean' ]
+[file2] (https://github.com/anupama-gupta/Hypernymy/tree/master/dataset) - dictionary storing false hypnonyms, eg: neg_dict['animal'] = ['grass', 'prey', 'bone', 'ocean' ]
 
-file3 - word2vec model 
+[file3] (https://github.com/anupama-gupta/Hypernymy/tree/master/dataset) - word2vec model 
 
 ## Tools
 
