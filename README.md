@@ -34,11 +34,11 @@ Learns word2vec embeddings from the ukwac corpus using gensim [word2vec] (https:
 
 #### Usage :
 
-python train_unigrams.py  file
+python train_unigrams.py  /path/corpus
 
 where :
 
-[file] (https://github.com/anupama-gupta/Hypernymy/blob/master/file_links.txt) - corpus location
+[/path/corpus] (https://github.com/anupama-gupta/Hypernymy/blob/master/file_links.txt) - corpus location
 
 
 
