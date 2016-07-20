@@ -10,7 +10,12 @@ The following feature vector representations are tested:
 
 ## Usage: 
 
-    $ python hypernym_classification.py naive_svm file1 file2 file3 
+Method 1)  
+
+    $ python hypernym_classification.py naive_svm file1 file2 file3  
+
+Method 2)
+          
     $ python hypernym_classification.py lex_function file1 file2 file3
 
 where :
