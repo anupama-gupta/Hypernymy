@@ -1,23 +1,3 @@
-''' 
-Implement Hypernym Relation Detection (binary classification using Linear SVM ) using the following feature vector representations :
-
-1)  Word2Vec hypnonym vectors 
-2)  Modified hypnonym vectors (modifying lexical function function is learnt using regression)
-
-Command line usage: 
-
-1. method 1)
-python hypernym_classification.py naive_svm /path/pos_dict /path/neg_dict /path/word2vec_model
-
-2. method 2)
-python hypernym_classification.py lex_function /path/pos_dict /path/neg_dict /path/word2vec_model
-
-Where :
-/path/pos_dict - dictionary storing true hypnonyms,  eg: pos_dict['animal'] = ['cat', 'dog', 'goat']
-/path/neg_dict - dictionary storing false hypnonyms, neg_dict['animal'] = ['grass', 'prey', 'bone', 'ocean' ]
-/path/word2vec_model - word2vec model (storing the word vectors)
-
- '''
 
 import pickle
 import collections
