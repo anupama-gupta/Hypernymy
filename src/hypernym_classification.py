@@ -160,6 +160,7 @@ def lex_function_test( class_name, reg_model, hyper_vec, clf) :
 #Displays the individual and average evalaution scores for all the classes/hypernyms
 def print_results( test_acc, train_acc, test_len , test_p, test_r, test_f):
 
+	print "\nResults:\n"
 	avg_test_p = 0
 	avg_test_r = 0
  	avg_test_f = 0
