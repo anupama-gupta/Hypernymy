@@ -1,16 +1,3 @@
-''''
-Learn word2vec embeddings from the ukwac corpus 
-
-Command line eg :
-python train_unigrams.py  /path/corpus_folder
-
-Download link -
-
-corpus_folder
-/home/anupama/tensor/corpus/ukwac/tagged/
-
-'''
-
 
 import gensim
 import logging
