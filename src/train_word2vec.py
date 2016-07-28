@@ -33,7 +33,7 @@ class MySentences(object):
 		if(  "</s>" in line ) :
 	    		flag = 0
 			yield sent.split()	    		 
-	    		continue
+	    		
 
         	if( flag == 1 ) :
 			wordlist = re.sub("[^\w]", " ",  line).split()	
