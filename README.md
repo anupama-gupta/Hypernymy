@@ -34,7 +34,7 @@ Learns word2vec embeddings from the ukwac corpus using gensim [word2vec] (https:
 
 #### Usage :
 
-    $ python train_unigrams.py  /path/corpus
+    $ python train_word2vec.py  /path/corpus
 
 where :
 
